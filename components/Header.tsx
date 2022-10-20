@@ -2,10 +2,16 @@ import Image from "next/image";
 import {
   GlobeAltIcon,
   UserCircleIcon,
-  MinusIcon,
   Bars3Icon,
 } from "@heroicons/react/24/solid";
+import { useState } from "react";
+import Calendar from "./Calendar";
 export const Header = () => {
+  const [searchInput, setSearchInput] = useState("");
+  const cancelSearch = () => {
+    setSearchInput("");
+  };
+
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md py-5 px-5 md:px-10">
       <div className="relative flex items-center h-10 cursor-pointer flex-grow ">
@@ -17,8 +23,10 @@ export const Header = () => {
         />
       </div>
       <div className="flex items-center ">
-        <div className="md:border-2 rounded-full py-2 flex ">
+        <div className="md:border-2 rounded-full py-2  ">
           <input
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
             className="flex-grow placeholder-gray-400 outline-none pl-2 bg-transparent"
             type="text"
             placeholder="start your search"
@@ -49,6 +57,20 @@ export const Header = () => {
           <UserCircleIcon className="h-6 w-6"></UserCircleIcon>
         </div>
       </div>
+
+      {searchInput.length > 0 ? (
+        <div className="flex flex-col col-span-3 mx-auto">
+          <Calendar />
+          <div className="flex">
+            <button onClick={cancelSearch} className="flex-grow">
+              Cancel
+            </button>
+            <button className="flex-grow text-red-400">Search</button>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </header>
   );
 };

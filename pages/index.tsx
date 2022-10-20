@@ -37,7 +37,7 @@ const Home: NextPage = ({ exploreData, cardsData }: any) => {
         <section className="pt-6">
           <h1 className="text-4xl mb-4 font-semibold">Live Anywhere</h1>
 
-          <div className=" flex space-x-3 overflow-scroll scrollbar-hide">
+          <div className=" flex space-x-3 overflow-scroll scrollbar-hide ml-4">
             {cardsData?.map(({ title, img }: any) => (
               <MediumCard key={title} img={img} title={title}></MediumCard>
             ))}
